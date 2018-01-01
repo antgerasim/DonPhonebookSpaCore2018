@@ -1,0 +1,21 @@
+<div bsModal #createPersonModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="createPersonModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+
+    <div #modalContent class="modal-content">
+        <form *ngIf="active" #createPersonForm="ngForm" id="frm_create_person" novalidate (ngSubmit)="save()">
+            <div class="modal-header">
+                <button type="button" class="close" (click)="close()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span>{{l("CreateNewPerson")}}</span>
+                </h4>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<!--weiter mit Creating a Modal
+https://aspnetzero.com/Documents/Developing-Step-By-Step-Angular
+
+add input fields in create-person.component.html as like create-role.component.html-->

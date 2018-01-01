@@ -17,6 +17,8 @@ import { SharedModule } from '@shared/shared.module';
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
 import { PhoneBookComponent } from '@app/phonebook/phonebook.component';
+import { CreatePersonComponent } from '@app/phonebook/create-person.component';
+
 
 import { UsersComponent } from '@app/users/users.component';
 import { CreateUserComponent } from '@app/users/create-user/create-user.component';
@@ -41,6 +43,7 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         HomeComponent,
         AboutComponent,
         PhoneBookComponent,
+        CreatePersonComponent,
         TenantsComponent,
 		CreateTenantComponent,
 		EditTenantComponent,

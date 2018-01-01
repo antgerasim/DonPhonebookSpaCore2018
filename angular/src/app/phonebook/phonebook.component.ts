@@ -1,7 +1,8 @@
-import { Component, Injector, OnInit } from '@angular/core';//onIninit not explicitly in apb docs! 
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';//onIninit not explicitly in apb docs! 
 import { AppComponentBase } from 'shared/app-component-base';
-import { appModuleAnimation } from 'shared/animations/routerTransition';
 import { PersonServiceProxy, PersonListDto, ListResultDtoOfPersonListDto } from 'shared/service-proxies/service-proxies'
+import { appModuleAnimation } from 'shared/animations/routerTransition';
+import { CreatePersonComponent} from 'app/phonebook/create-person.component';
 
 @Component({
     templateUrl: './phonebook.component.html',
@@ -9,6 +10,8 @@ import { PersonServiceProxy, PersonListDto, ListResultDtoOfPersonListDto } from 
 })
 
 export class PhoneBookComponent extends AppComponentBase implements OnInit  {
+
+    @ViewChild('createPersonModal') createPersonModal: CreatePersonComponent;
 
     people: PersonListDto[] = [];
     filter: string = '';
@@ -30,5 +33,15 @@ export class PhoneBookComponent extends AppComponentBase implements OnInit  {
             this.people = result.items;
         });
     }
+    // Show Modals
 
+    createPerson(): void {
+        this.createPersonModal.show();
+    }
 }
+
+
+/*weiter mit Creating a Modal
+https://aspnetzero.com/Documents/Developing-Step-By-Step-Angular
+
+    add input fields in create - person.component.html as like create- role.component.html*/

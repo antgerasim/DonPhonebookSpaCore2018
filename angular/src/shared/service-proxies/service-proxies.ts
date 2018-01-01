@@ -252,6 +252,52 @@ export class PersonServiceProxy {
         }
         return Observable.of<ListResultDtoOfPersonListDto>(<any>null);
     }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    createPerson(input: CreatePersonInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Person/CreatePerson";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processCreatePerson(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processCreatePerson(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processCreatePerson(response: Response): Observable<void> {
+        const status = response.status; 
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            return Observable.of<void>(<any>null);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<void>(<any>null);
+    }
 }
 
 @Injectable()
@@ -1870,6 +1916,56 @@ export interface IPersonListDto {
     creationTime: moment.Moment;
     creatorUserId: number;
     id: number;
+}
+
+export class CreatePersonInput implements ICreatePersonInput {
+    name: string;
+    surname: string;
+    emailAddress: string;
+
+    constructor(data?: ICreatePersonInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.name = data["name"];
+            this.surname = data["surname"];
+            this.emailAddress = data["emailAddress"];
+        }
+    }
+
+    static fromJS(data: any): CreatePersonInput {
+        let result = new CreatePersonInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["name"] = this.name;
+        data["surname"] = this.surname;
+        data["emailAddress"] = this.emailAddress;
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new CreatePersonInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface ICreatePersonInput {
+    name: string;
+    surname: string;
+    emailAddress: string;
 }
 
 export class CreateRoleDto implements ICreateRoleDto {
