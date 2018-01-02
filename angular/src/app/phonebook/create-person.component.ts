@@ -28,19 +28,19 @@ export class CreatePersonComponent extends AppComponentBase {
         this.active = true;
         this.person = new CreatePersonInput();
         this.modal.show();
+        //this.modal.show({ class: 'modal-lg'});
     }
 
     onShown(): void {
-       // $(this.modalContent.nativeElement).focus();
+        // $(this.modalContent.nativeElement).focus();
         $.AdminBSB.input.activate($(this.modalContent.nativeElement));
     }
     save(): void {
-
-
         this.saving = true;
         this._personService.createPerson(this.person)
-            .finally(() => this.saving = false)
+            .finally(() => { this.saving = false; })
             .subscribe(() => {
+                //debugger;
                 this.notify.info(this.l('SavedSuccessfully'));
                 this.close();
                 this.modalSave.emit(this.person);
@@ -48,7 +48,7 @@ export class CreatePersonComponent extends AppComponentBase {
     }
 
     close(): void {
-        this.modal.hide();
         this.active = false;
+        this.modal.hide();
     }
 }

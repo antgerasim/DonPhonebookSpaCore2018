@@ -10,7 +10,15 @@ namespace Don2018.PhonebookSpa.Authorization
         {
             context.CreatePermission(PermissionNames.Pages_Users, L("Users"));
             context.CreatePermission(PermissionNames.Pages_Roles, L("Roles"));
-            context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), multiTenancySides: MultiTenancySides.Host);
+            context.CreatePermission(PermissionNames.Pages_Tenants, L("Tenants"), 
+                multiTenancySides: MultiTenancySides.Host);
+            /*Don added*/
+            // context.CreateChildPermission(AppPermissions.Pages_Tenant_PhoneBook, L("PhoneBook"), multiTenancySides: MultiTenancySides.Tenant);
+            //context.CreatePermission(PermissionNames.Pages_Tenant_PhoneBook, L("PhoneBook"),
+            //  multiTenancySides: MultiTenancySides.Tenant);
+           var phoneBook =  context.CreatePermission(PermissionNames.Pages_Tenant_PhoneBook, L("PhoneBook"), multiTenancySides: MultiTenancySides.Tenant);
+            phoneBook.CreateChildPermission(PermissionNames.Pages_Tenant_PhoneBook_CreatePerson, L("CreateNewPerson"),
+                multiTenancySides: MultiTenancySides.Tenant);
         }
 
         private static ILocalizableString L(string name)

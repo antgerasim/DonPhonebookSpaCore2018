@@ -2,13 +2,16 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Collections.Extensions;
 using Abp.Domain.Repositories;
 using Castle.Core.Internal;
+using Don2018.PhonebookSpa.Authorization;
 using Don2018.PhonebookSpa.PhoneBook.People.Dto;
 
 namespace Don2018.PhonebookSpa.PhoneBook.People
 {
+    [AbpAuthorize(PermissionNames.Pages_Tenant_PhoneBook)]
     public class PersonAppService : PhonebookSpaAppServiceBase, IPersonAppService
     {
         private readonly IRepository<Person> _personRepository;
@@ -29,6 +32,7 @@ namespace Don2018.PhonebookSpa.PhoneBook.People
             return retVal;
         }
 
+        [AbpAuthorize(PermissionNames.Pages_Tenant_PhoneBook_CreatePerson)]
         public async Task CreatePerson(CreatePersonInput input)
         {
             var person = ObjectMapper.Map<Person>(input);

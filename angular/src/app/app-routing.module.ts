@@ -9,7 +9,6 @@ import { TenantsComponent } from './tenants/tenants.component';
 import { RolesComponent } from "app/roles/roles.component";
 import { PhoneBookComponent } from './phonebook/phonebook.component';
 
-
 @NgModule({
     imports: [
         RouterModule.forChild([
@@ -17,16 +16,19 @@ import { PhoneBookComponent } from './phonebook/phonebook.component';
                 path: '',
                 component: AppComponent,
                 children: [
-                    { path: 'home', component: HomeComponent,  canActivate: [AppRouteGuard] },
+                    { path: 'home', component: HomeComponent, canActivate: [AppRouteGuard] },
                     { path: 'users', component: UsersComponent, data: { permission: 'Pages.Users' }, canActivate: [AppRouteGuard] },
                     { path: 'roles', component: RolesComponent, data: { permission: 'Pages.Roles' }, canActivate: [AppRouteGuard] },
                     { path: 'tenants', component: TenantsComponent, data: { permission: 'Pages.Tenants' }, canActivate: [AppRouteGuard] },
-                    { path: 'about', component: AboutComponent },
-                    { path: 'phonebook', component: PhoneBookComponent  },
+                    { path: 'about', component: AboutComponent },//also look into to sidebar-nav.components
+                    { path: 'phonebook', component: PhoneBookComponent, data: { permission: 'Pages.Tenants.PhoneBook' }, canActivate: [AppRouteGuard] }
+         
+
                 ]
             }
         ])
     ],
     exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -15,6 +15,7 @@ export class PhoneBookComponent extends AppComponentBase implements OnInit  {
 
     people: PersonListDto[] = [];
     filter: string = '';
+    isTableLoading: boolean = false;
 
     constructor(
         injector: Injector,
@@ -28,9 +29,11 @@ export class PhoneBookComponent extends AppComponentBase implements OnInit  {
     }
 
     getPeople(): void {
+        this.isTableLoading = true;
         this._personService.getPeople(this.filter).subscribe((result) => {
             //debugger;
             this.people = result.items;
+            this.isTableLoading = false;
         });
     }
     // Show Modals

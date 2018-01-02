@@ -1,4 +1,5 @@
-<div bsModal #createRoleModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog" aria-labelledby="createRoleModal" aria-hidden="true" [config]="{backdrop: 'static'}">
+<div bsModal #createRoleModal="bs-modal" class="modal fade" (onShown)="onShown()" tabindex="-1" role="dialog"
+     aria-labelledby="createRoleModal" aria-hidden="true" [config]="{backdrop: 'static'}">
     <div class="modal-dialog">
 
         <div #modalContent class="modal-content">
@@ -52,7 +53,7 @@
                             <h4>Permissions</h4>
                             <ng-template ngFor let-permission [ngForOf]="permissions.items" let-permissionIndex="index">
                                 <div class="col-sm-6">
-                                    <input type="checkbox" name="permission" value="{{permission.name}}" class="filled-in" id="permission-{{permissionIndex}}" checked="checked" />
+                                    <input type="checkbox" name="permission" value="{{permission.name}}" class="filled-in" id="permission-{{permissionIndex}}" checked="checked"/>
                                     <label for="permission-{{permissionIndex}}">{{permission.displayName}}</label>
                                 </div>
                             </ng-template>

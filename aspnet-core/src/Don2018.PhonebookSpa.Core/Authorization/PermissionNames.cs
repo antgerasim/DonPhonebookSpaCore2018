@@ -7,5 +7,13 @@
         public const string Pages_Users = "Pages.Users";
 
         public const string Pages_Roles = "Pages.Roles";
+
+        /*Don added*/
+        public const string Pages_Tenant_PhoneBook = "Pages.Tenants.PhoneBook";
+
+        public const string Pages_Tenant_PhoneBook_CreatePerson = "Pages.Tenants.PhoneBook.CreatePerson";
+
+
+
     }
 }

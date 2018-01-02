@@ -1,27 +1,8 @@
-<!--
-<div [@routerTransition]>
-    <div class="m-subheader ">
-        <div class="d-flex align-items-center">
-            <div class="mr-auto col-sm-6">
-                <h3 class="m-subheader__title m-subheader__title--separator">
-                    <span>{{l("PhoneBook")}}</span>
-                </h3>
-            </div>
-        </div>
-    </div>
-    <div class="m-content">
-        <div class="m-portlet m-portlet--mobile">
-            <div class="m-portlet__body">
-                <p>PHONE BOOK CONTENT COMES HERE!</p>
-            </div>
-        </div>
-    </div>
-</div>
--->
-
-<!--<div class="row clearfix" [@routerTransition]> $1$routerTransition attribute is required for page transition animation.#1#
+<div class="row clearfix" [@routerTransition]>
+    <!--routerTransition attribute is required for page transition animation-->
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card main-content">
+        <!-- <div class="card p-b-20" style="padding-bottom: 20px;">-->
+        <div class="card p-b-20">
             <div class="header">
                 <h2>
                     {{l('PhoneBook')}}
@@ -33,124 +14,44 @@
                             <i class="material-icons">more_vert</i>
                         </a>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);" class=" waves-effect <waves-block></waves-block>" (click)="refresh();"><i class="material-icons">refresh</i> Refresh</a></li>
+                            <li>
+                                <a href="javascript:void(0);" class=" waves-effect <waves-block></waves-block>" (click)="getPeople();"><i class="material-icons">refresh</i> Refresh</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
             </div>
-            <div class="body table-responsive">
-                <table class="table table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>{{l('AllPeople')}}</th>
-                        $1$                            <th>{{l('DisplayName')}}</th>
-                        <th>{{l('Actions')}}</th>#1#
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let person of people">
-                        <td>
-                            {{person.name + ' ' + person.surname}}
-                        </td>
-                            
-                        <td class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">menu</i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="editRole(role)"><i class="material-icons">create</i>Edit</a></li>
-                                <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="delete(role)"><i class="material-icons">delete_sweep</i>Delete</a></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="text-align: center;" *ngIf="totalItems > pageSize">
-                    <pagination-controls (pageChange)="getDataPage($event)" id="server"></pagination-controls>
-                </div>
-                <button type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" (click)="createRole()">
-                    <i class="material-icons">add</i>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>-->
-
-<div class="row clearfix" [@routerTransition]> <!--routerTransition attribute is required for page transition animation-->
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card" style="padding-bottom: 20px;">
-            <div class="header">
-                <h2>
-                    {{l('PhoneBook')}}
-                </h2>
-                <ul class="header-dropdown m-r--5">
-                    <i class="fa fa-spin fa-spinner" *ngIf="isTableLoading"></i>
-                    <li class="dropdown">
-                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="material-icons">more_vert</i>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li><a href="javascript:void(0);" class=" waves-effect <waves-block></waves-block>" (click)="refresh();"><i class="material-icons">refresh</i> Refresh</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+           
             <div class="body">
+                <h3>{{l("AllPeople")}}</h3>
                 <div class="list-group">
-                    <a href="javascript:;" class="list-group-item" *ngFor="let person of people">
-                        <h4 class="list-group-item-heading">
-                            {{person.name + ' ' + person.surname}}
-                        </h4>
-                        <p class="list-group-item-text">
-                            {{person.emailAddress}}
-                        </p>
-                    </a>
-                    <div class="text-align: center;" *ngIf="totalItems > pageSize">
-                        <pagination-controls (pageChange)="getDataPage($event)" id="server"></pagination-controls>
+                    <div *ngFor="let person of people">
+                        <span>
+                            <a href="javascript:;" class="list-group-item">
+                                <h4 class="list-group-item-heading">
+                                    {{person.name + ' ' + person.surname}}
+                                </h4>
+                                <p class="list-group-item-text">
+                                    {{person.emailAddress}}
+                                </p>
+                            </a>
+                            <button type="button" class="btn btn-primary  waves-effect waves-float ">
+                                <i class="material-icons">delete</i>
+                        <!--        <i class="material-icons">highlight_off</i>-->
+                                <!-- <i class="material-icons">add</i>-->
+                            </button>
+                        </span>
                     </div>
-                    <button type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" style="margin-top: 10px;" (click)="createPerson()">
+                    <button *ngIf="isGranted('Pages.Tenants.PhoneBook.CreatePerson')" type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right m-t-10"
+                            (click)="createPerson()">
                         <i class="material-icons">add</i>
                     </button>
                 </div>
-
-
-                <!--  <table class="table table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>{{l('AllPeople')}}</th>
-                        $2$ <th>{{l('DisplayName')}}</th>
-                        <th>{{l('Actions')}}</th>#2#
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr *ngFor="let person of people">
-                        <td>
-                            {{person.name + ' ' + person.surname}}
-                        </td>
-
-                        <td class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">menu</i>
-                            </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="editRole(role)"><i class="material-icons">create</i>Edit</a></li>
-                                <li><a href="javascript:void(0);" class="waves-effect waves-block" (click)="delete(role)"><i class="material-icons">delete_sweep</i>Delete</a></li>
-                            </ul>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>-->
-                <!--                <div class="text-align: center;" *ngIf="totalItems > pageSize">
-                    <pagination-controls (pageChange)="getDataPage($event)" id="server"></pagination-controls>
-                </div>
-                <button type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" (click)="createRole()">
-                    <i class="material-icons">add</i>
-                </button>-->
             </div>
         </div>
     </div>
 </div>
 
-<create-person-modal #createPersonModal (modalSave)="refresh()"></create-person-modal>
+<create-person-modal #createPersonModal (modalSave)="getPeople()"></create-person-modal>
 
-
+<!--<create-role-modal #createRoleModal (modalSave)="refresh()"></create-role-modal>-->

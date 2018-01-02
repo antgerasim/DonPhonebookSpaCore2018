@@ -88,6 +88,7 @@
     <!--don added-->
     <text name="PhoneBook">Phone Book</text>
     <text name="AllPeople">All People</text>
+    <text name="CreateNewPerson">Create New Person</text>
     
   </texts>
 </localizationDictionary>
