@@ -1,4 +1,6 @@
-﻿/* Show Fieldset and Legend ==================== */
+/*Don Ficken admin-bsb style.css*/
+
+/* Show Fieldset and Legend ==================== */
 .show-fieldset {
     margin: 10px;
     padding: 10px;
@@ -2513,19 +2515,22 @@ section.content {
   outline: none !important; }
 
 .btn-circle {
-  border: none;
-  outline: none !important;
-  overflow: hidden;
-  width: 40px;
-  height: 40px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  border-radius: 50%; }
+    border: none;
+    outline: none !important;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+}
   .btn-circle i {
     font-size: 18px;
     position: relative;
-    left: -1px; }
+    left: -1px;
+    bottom: -2px; /*don_added*/
+  }
 
 .btn-link {
   font-weight: bold;
@@ -2558,18 +2563,19 @@ section.content {
     left: 0px !important;
     top: 6px !important; }
 
-.btn:not(.btn-link):not(.btn-circle) {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  border-radius: 2px;
-  border: none;
-  font-size: 13px;
-  outline: none; }
-  .btn:not(.btn-link):not(.btn-circle):hover {
+.btn:not(.btn-link):not(.btn-circle):not(.don-btn-circle) {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    border-radius: 2px;
+    border: none;
+    font-size: 13px;
+    outline: none;
+}
+  .btn:not(.btn-link):not(.btn-circle):not(.don-btn-circle):hover {
     outline: none; }
-  .btn:not(.btn-link):not(.btn-circle) i {
+  .btn:not(.btn-link):not(.btn-circle):not(.don-btn-circle) i {
     font-size: 20px;
     position: relative;
     top: 3px; }

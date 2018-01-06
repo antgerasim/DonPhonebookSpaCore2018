@@ -2,6 +2,7 @@
 using Abp.Localization.Dictionaries;
 using Abp.Localization.Dictionaries.Xml;
 using Abp.Reflection.Extensions;
+using Don2018.PhonebookSpa.PhoneBook.Phones;
 
 namespace Don2018.PhonebookSpa.Localization
 {

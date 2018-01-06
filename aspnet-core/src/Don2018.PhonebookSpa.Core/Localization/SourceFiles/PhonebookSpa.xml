@@ -89,6 +89,10 @@
     <text name="PhoneBook">Phone Book</text>
     <text name="AllPeople">All People</text>
     <text name="CreateNewPerson">Create New Person</text>
-    
+    <text name="DeletePerson">Delete Person</text>
+    <text name="SuccessfullyDeleted">Successfully deleted {0}</text>  EditPerson
+    <text name="EditPerson">Edit Person</text> 
+    <text name="SearchWithThreeDot">Search...</text>
+
   </texts>
 </localizationDictionary>

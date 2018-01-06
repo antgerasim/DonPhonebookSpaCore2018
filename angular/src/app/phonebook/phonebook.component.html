@@ -1,8 +1,6 @@
 <div class="row clearfix" [@routerTransition]>
-    <!--routerTransition attribute is required for page transition animation-->
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <!-- <div class="card p-b-20" style="padding-bottom: 20px;">-->
-        <div class="card p-b-20">
+        <div class="card main-content">
             <div class="header">
                 <h2>
                     {{l('PhoneBook')}}
@@ -15,42 +13,105 @@
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li>
-                                <a href="javascript:void(0);" class=" waves-effect <waves-block></waves-block>" (click)="getPeople();"><i class="material-icons">refresh</i> Refresh</a>
+                                <a href="javascript:void(0);" class=" waves-effect waves-block()" (click)="getPeople();"><i class="material-icons">refresh</i> {{l('Refresh')}}</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </div>
-           
-            <div class="body">
-                <h3>{{l("AllPeople")}}</h3>
-                <div class="list-group">
-                    <div *ngFor="let person of people">
-                        <span>
-                            <a href="javascript:;" class="list-group-item">
-                                <h4 class="list-group-item-heading">
-                                    {{person.name + ' ' + person.surname}}
-                                </h4>
-                                <p class="list-group-item-text">
-                                    {{person.emailAddress}}
-                                </p>
-                            </a>
-                            <button type="button" class="btn btn-primary  waves-effect waves-float ">
-                                <i class="material-icons">delete</i>
-                        <!--        <i class="material-icons">highlight_off</i>-->
-                                <!-- <i class="material-icons">add</i>-->
+            <div class="body table-responsive">
+                <div class="form-group">
+                    <h3>{{l("AllPeople")}} <span *ngIf="!isTableLoading">({{people.length}})</span></h3>
+                    <div class="input-group" *ngIf="!isTableLoading">
+                        <input [(ngModel)]="filter" name="filter" autoFocus class="form-control" [placeholder]="l('SearchWithThreeDot')" type="text"/>
+                        <span class="input-group-btn">
+                            <button (click)="getPeople()" class="btn btn-primary waves-effect" type="submit">
+                                <i class="material-icons">search</i>
                             </button>
                         </span>
                     </div>
-                    <button *ngIf="isGranted('Pages.Tenants.PhoneBook.CreatePerson')" type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right m-t-10"
+                </div>
+                <div class="" id="mainTable" *ngIf="!isTableLoading">
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                        <tr *ngFor="let person of people">
+                            <td>
+                                <!-- https://stackoverflow.com/questions/40653758/angular-2-prevent-enter-from-submitting-in-template-driven-form-->
+                                <form (keydown.enter)="$event.preventDefault()" class="form-inline">
+                                    <div class="form-group">
+                                        <h4 class="h4 font-bold" style="float: left">
+                                            {{person.name + ' ' + person.surname}}
+                                        </h4>
+                                        <button *ngIf="isGranted('Pages.Tenant.PhoneBook.DeletePerson')" (click)="deletePerson(person)" title="{{l(Delete)}}"
+                                                class="pull-right btn btn-primary don-btn-circle waves-effect ">
+                                            <i class="material-icons">delete</i>
+                                        </button>
+                                        <button *ngIf="isGranted('Pages.Tenant.PhoneBook.EditPerson')" (click)="editPerson(person)" title="{{l('Edit')}}"
+                                                class="pull-right btn btn-primary don-btn-circle waves-effect m-r-5">
+                                            <i class="material-icons">edit</i>
+                                        </button>
+                                    </div>
+                                    <span class="text">
+                                        {{person.emailAddress}}
+                                    </span>
+                                    <div *ngIf="person===editingPerson" class="">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 10%"></th>
+                                                <th style="width: 15%">{{l("Type")}}</th>
+                                                <th style="width: 75%">{{l("PhoneNumber")}}</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let phone of person.phones">
+                                                <td>
+                                                    <button (click)="deletePhone(phone, person)" class="btn btn-danger">
+                                                        <i class="material-icons">clear</i>
+                                                    </button>
+                                                </td>
+                                                <td>{{getPhoneTypeAsString(phone.type)}}</td>
+                                                <td>{{phone.number}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <button (click)="savePhone()" class="btn btn-success">
+                                                        <i class="material-icons">save</i>
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <select name="Type" [(ngModel)]="newPhone.type" class="form-control">
+                                                        <option value="0">{{l("PhoneType_Mobile")}}</option>
+                                                        <option value="1">{{l("PhoneType_Home")}}</option>
+                                                        <option value="2">{{l("PhoneType_Business")}}</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="number" [(ngModel)]="newPhone.number" class="form-control"/>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </td>
+
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button *ngIf="isGranted('Pages.Tenants.PhoneBook.CreatePerson')" type="button" class="btn btn-primary btn-circle-lg waves-effect waves-circle waves-float pull-right"
                             (click)="createPerson()">
                         <i class="material-icons">add</i>
                     </button>
                 </div>
+
+
             </div>
         </div>
     </div>
 </div>
+
 
 <create-person-modal #createPersonModal (modalSave)="getPeople()"></create-person-modal>
 

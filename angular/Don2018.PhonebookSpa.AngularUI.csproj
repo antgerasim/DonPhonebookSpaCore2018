@@ -11,6 +11,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="dist" />
+    <None Remove="src\bsb-theme\css\bootstrap3.3.6.css" />
     <None Include="App.config" />
     <None Update="wwwroot\**\*;web.config">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
@@ -22,6 +23,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="node_modules\" />
     <Folder Include="src\app\phonebook\create-person\" />
   </ItemGroup>
 </Project>

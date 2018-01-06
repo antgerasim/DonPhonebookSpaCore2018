@@ -6,6 +6,7 @@ using Abp.Reflection.Extensions;
 using Don2018.PhonebookSpa.Configuration;
 using Don2018.PhonebookSpa.EntityFrameworkCore;
 using Don2018.PhonebookSpa.Migrator.DependencyInjection;
+using Don2018.PhonebookSpa.PhoneBook.Phones;
 
 namespace Don2018.PhonebookSpa.Migrator
 {

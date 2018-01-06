@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using Don2018.PhonebookSpa.Configuration;
+using Don2018.PhonebookSpa.PhoneBook.Phones;
 using Don2018.PhonebookSpa.Web;
 
 namespace Don2018.PhonebookSpa.EntityFrameworkCore

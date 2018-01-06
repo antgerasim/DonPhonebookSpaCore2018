@@ -2,6 +2,7 @@
 using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using Don2018.PhonebookSpa.PhoneBook.People.Dto;
+using Don2018.PhonebookSpa.PhoneBook.Phones.Dto;
 
 namespace Don2018.PhonebookSpa.PhoneBook.People
 {
@@ -9,6 +10,9 @@ namespace Don2018.PhonebookSpa.PhoneBook.People
     {
         ListResultDto<PersonListDto> GetPeople(GetPeopleInput input);
         Task CreatePerson(CreatePersonInput input);
+        Task DeletePerson(EntityDto input);
+        Task<PhoneInPersonListDto> AddPhone(AddPhoneInput input);
+        Task DeletePhone(EntityDto<long> input);
     }
 
 }

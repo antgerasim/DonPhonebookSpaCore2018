@@ -9,6 +9,7 @@ using Don2018.PhonebookSpa.Authorization.Users;
 using Don2018.PhonebookSpa.Configuration;
 using Don2018.PhonebookSpa.Localization;
 using Don2018.PhonebookSpa.MultiTenancy;
+using Don2018.PhonebookSpa.PhoneBook.Phones;
 using Don2018.PhonebookSpa.Timing;
 
 namespace Don2018.PhonebookSpa

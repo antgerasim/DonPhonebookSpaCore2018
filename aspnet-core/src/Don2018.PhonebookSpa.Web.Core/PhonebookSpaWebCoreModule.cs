@@ -11,7 +11,7 @@ using Abp.Zero.Configuration;
 using Don2018.PhonebookSpa.Authentication.JwtBearer;
 using Don2018.PhonebookSpa.Configuration;
 using Don2018.PhonebookSpa.EntityFrameworkCore;
-
+using Don2018.PhonebookSpa.PhoneBook.Phones;
 #if FEATURE_SIGNALR
 using Abp.Web.SignalR;
 #elif FEATURE_SIGNALR_ASPNETCORE

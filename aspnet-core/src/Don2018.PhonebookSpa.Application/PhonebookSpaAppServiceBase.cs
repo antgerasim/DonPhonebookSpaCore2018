@@ -6,6 +6,7 @@ using Abp.IdentityFramework;
 using Abp.Runtime.Session;
 using Don2018.PhonebookSpa.Authorization.Users;
 using Don2018.PhonebookSpa.MultiTenancy;
+using Don2018.PhonebookSpa.PhoneBook.Phones;
 
 namespace Don2018.PhonebookSpa
 {

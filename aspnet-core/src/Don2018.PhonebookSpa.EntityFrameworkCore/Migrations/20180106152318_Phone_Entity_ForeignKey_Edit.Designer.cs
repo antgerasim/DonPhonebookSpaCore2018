@@ -16,9 +16,10 @@ using System;
 namespace Don2018.PhonebookSpa.Migrations
 {
     [DbContext(typeof(PhonebookSpaDbContext))]
-    partial class PhonebookSpaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180106152318_Phone_Entity_ForeignKey_Edit")]
+    partial class Phone_Entity_ForeignKey_Edit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

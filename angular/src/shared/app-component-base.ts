@@ -51,6 +51,7 @@ export abstract class AppComponentBase {
     }
 
     isGranted(permissionName: string): boolean {
+       // debugger;
         return this.permission.isGranted(permissionName);
     }
 }

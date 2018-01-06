@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Abp.Domain.Entities.Auditing;
+using Don2018.PhonebookSpa.PhoneBook.Phones;
 
-namespace Don2018.PhonebookSpa.PhoneBook
+namespace Don2018.PhonebookSpa.PhoneBook.People
 {
     [Table("PbPersonas")]
     public class Person : FullAuditedEntity
@@ -21,5 +24,7 @@ namespace Don2018.PhonebookSpa.PhoneBook
 
         [MaxLength(MaxEmailAddressLength)]
         public virtual string EmailAddress { get; set; }
+
+        public virtual ICollection<Phone> Phones { get; set; }
     }
 }
