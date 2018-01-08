@@ -16,9 +16,10 @@ using System;
 namespace Don2018.PhonebookSpa.Migrations
 {
     [DbContext(typeof(PhonebookSpaDbContext))]
-    partial class PhonebookSpaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180108214556_Implemented_IMustHaveTenant_For_Person_Virtual_Prop")]
+    partial class Implemented_IMustHaveTenant_For_Person_Virtual_Prop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

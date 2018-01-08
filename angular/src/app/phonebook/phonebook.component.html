@@ -43,8 +43,8 @@
                                     <div class="row clearfix">
                                         <div class="col-sm-10" style="margin-bottom: -20px">
                                             <div class="form-group">
-                                                <div class="">
-                                                    <h4 (click)="editPersonDetails(person)" class="h4 font-bold" role="button" title="Show person details">
+                                                <div (click)="editPersonDetails(person)" role="button">
+                                                    <h4 class="h4 font-bold"  title="Show person details">
                                                         {{person.name + ' ' + person.surname}}
                                                     </h4>
                                                     <span class="text">
@@ -74,8 +74,8 @@
                                             <thead>
                                             <tr>
                                                 <th style="width: 10%"></th>
-                                                <th style="width: 15%">{{l("Type")}}</th>
-                                                <th style="width: 75%">{{l("PhoneNumber")}}</th>
+                                                <th style="width: 25%">{{l("Type")}}</th>
+                                                <th style="width: 65%">{{l("PhoneNumber")}}</th>
                                             </tr>
                                             </thead>
                                             <tbody>

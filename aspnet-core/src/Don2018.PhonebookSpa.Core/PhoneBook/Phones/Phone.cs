@@ -8,6 +8,7 @@ namespace Don2018.PhonebookSpa.PhoneBook.Phones
     [Table("PbPhones")]
     public class Phone : CreationAuditedEntity<long>
     {
+        //IMustHaveTenant dont need since phone repo isnt used directly to get phones
         public const int MaxNumberLength = 16;
 
         //[ForeignKey("PersonId")]

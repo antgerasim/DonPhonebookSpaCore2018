@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Abp.Domain.Entities;
 using Abp.Domain.Entities.Auditing;
 using Don2018.PhonebookSpa.PhoneBook.Phones;
 
 namespace Don2018.PhonebookSpa.PhoneBook.People
 {
     [Table("PbPersonas")]
-    public class Person : FullAuditedEntity
+    public class Person : FullAuditedEntity, IMustHaveTenant
     {
         public const int MaxNameLength = 32;
         public const int MaxSurnameLength = 32;
@@ -26,5 +27,6 @@ namespace Don2018.PhonebookSpa.PhoneBook.People
         public virtual string EmailAddress { get; set; }
 
         public virtual ICollection<Phone> Phones { get; set; }
+        public virtual int TenantId { get; set; }
     }
 }

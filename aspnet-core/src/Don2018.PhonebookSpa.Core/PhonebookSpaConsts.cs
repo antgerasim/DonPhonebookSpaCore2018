@@ -6,6 +6,6 @@
 
         public const string ConnectionStringName = "Default";
 
-        public const bool MultiTenancyEnabled = false;//was true
+        public const bool MultiTenancyEnabled = true;
     }
 }

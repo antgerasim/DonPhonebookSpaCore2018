@@ -1,6 +1,18 @@
- login: admin 
- password: 123qwe
+//tenants (switched tenant? then ust login with email address!!)
+login: admin 
+password: 123qwe
 
+login: trio
+password: 123qwe
+trio@trio.mail.ru
+
+login: donTenant
+name: donTenant
+password: 123qwe
+trio@trio.mail.ru
+
+
+//users
 login: DonUser 
 pass: 123456
 emial: donuser@donmail.com
