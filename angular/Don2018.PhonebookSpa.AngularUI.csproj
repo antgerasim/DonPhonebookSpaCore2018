@@ -24,6 +24,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="node_modules\" />
-    <Folder Include="src\app\phonebook\create-person\" />
   </ItemGroup>
 </Project>

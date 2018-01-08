@@ -1,9 +1,13 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core'; //onIninit not explicitly in apb docs! 
-import { AppComponentBase } from 'shared/app-component-base';
-import { PersonServiceProxy, PersonListDto, ListResultDtoOfPersonListDto, AddPhoneInput, AddPhoneInputType, PhoneInPersonListDtoType } from
-    'shared/service-proxies/service-proxies'
+import { Component, Injector, OnInit, ViewChild } from '@angular/core'; //onIninit not explicitly in apb docs!
 import { appModuleAnimation } from 'shared/animations/routerTransition';
-import { CreatePersonComponent } from 'app/phonebook/create-person.component';
+import { PersonServiceProxy, PersonListDto, AddPhoneInput, AddPhoneInputType, PhoneInPersonListDtoType } from
+    'shared/service-proxies/service-proxies';
+import { AppComponentBase } from 'shared/app-component-base';
+import { CreatePersonComponent } from 'app/phonebook/create-person/create-person.component';
+import { EditPersonComponent } from 'app/phonebook/edit-person/edit-person.component';
+
+/*import { CreatePersonComponent2 } from '@app/phonebook/create-person/create-person2.component';*/
+
 import * as _ from 'lodash';
 
 @Component({
@@ -12,8 +16,10 @@ import * as _ from 'lodash';
 })
 export class PhoneBookComponent extends AppComponentBase implements OnInit {
 
-    @ViewChild('createPersonModal')
-    createPersonModal: CreatePersonComponent;
+    @ViewChild('createPersonModal') createPersonModal: CreatePersonComponent;
+    @ViewChild('editPersonModal') editPersonModal: EditPersonComponent;
+
+/*    createPersonModal2: CreatePersonComponent2;*/
 
     people: PersonListDto[] = [];
     filter: string = '';
@@ -26,9 +32,14 @@ export class PhoneBookComponent extends AppComponentBase implements OnInit {
         private _personService: PersonServiceProxy
     ) {
         super(injector);
+        console.log(injector);
     }
 
     ngOnInit(): void {
+        //this.testCompVar;
+        //this.createPersonModal2;
+        this.editPersonModal;
+        this.createPersonModal;
         this.getPeople();
     }
 
@@ -47,6 +58,11 @@ export class PhoneBookComponent extends AppComponentBase implements OnInit {
         this.createPersonModal.show();
     }
 
+    protected editPerson(personId): void {
+        debugger;
+        this.editPersonModal.show(personId);
+    }
+
     protected deletePerson(person: PersonListDto): void {
         var fullName = person.name + ' ' + person.surname;
         abp.message.confirm("Delete person '" + fullName + "'?", (result: boolean) => {
@@ -62,7 +78,7 @@ export class PhoneBookComponent extends AppComponentBase implements OnInit {
         );
     }
 
-    protected editPerson(person: PersonListDto): void {
+    protected editPersonDetails(person: PersonListDto): void {
         if (person === this.editingPerson) {
             this.editingPerson = null;
         }
@@ -107,6 +123,10 @@ export class PhoneBookComponent extends AppComponentBase implements OnInit {
             this.newPhone.number = '';
             this.notify.success(this.l('SavedSuccessfully'));
         });
+    }
+
+    protected test(): void {
+        alert('Ficken');
     }
 }
 

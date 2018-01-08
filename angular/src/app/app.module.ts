@@ -1,3 +1,4 @@
+/// <reference path="phonebook/phonebook.component.ts" />
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,8 +18,8 @@ import { SharedModule } from '@shared/shared.module';
 import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
 import { PhoneBookComponent } from '@app/phonebook/phonebook.component';
-import { CreatePersonComponent } from '@app/phonebook/create-person.component';
-
+import { CreatePersonComponent } from '@app/phonebook/create-person/create-person.component';
+import { EditPersonComponent } from '@app/phonebook/edit-person/edit-person.component';
 
 import { UsersComponent } from '@app/users/users.component';
 import { CreateUserComponent } from '@app/users/create-user/create-user.component';
@@ -37,6 +38,7 @@ import { SideBarFooterComponent } from '@app/layout/sidebar-footer.component';
 import { RightSideBarComponent } from '@app/layout/right-sidebar.component';
 import { MaterialInput } from '@shared/directives/material-input.directive';
 
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -44,6 +46,7 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         AboutComponent,
         PhoneBookComponent,
         CreatePersonComponent,
+        EditPersonComponent,
         TenantsComponent,
 		CreateTenantComponent,
 		EditTenantComponent,

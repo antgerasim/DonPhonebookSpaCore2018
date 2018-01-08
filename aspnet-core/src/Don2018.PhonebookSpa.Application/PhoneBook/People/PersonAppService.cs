@@ -61,6 +61,25 @@ namespace Don2018.PhonebookSpa.PhoneBook.People
             await _personRepository.DeleteAsync(person);
         }
 
+        public async Task<GetPersonForEditOutput> GetPersonForEdit(GetPersonForEditInput input)
+        {
+            var person = await _personRepository.GetAsync(input.Id);
+            return ObjectMapper.Map<GetPersonForEditOutput>(person);
+        }
+
+        public async Task EditPerson(EditPersonInput input)
+        {
+            var person = await _personRepository.GetAsync(input.Id);
+            person.Name = input.Name;
+            person.Surname = input.Surname;
+            person.EmailAddress = input.EmailAddress;
+
+            await _personRepository.UpdateAsync(person);
+            //weiter mit https://aspnetzero.com/Documents/Developing-Step-By-Step-Angular#edit-mode-for-people
+        }
+
+
+
         /*Instead of creating a seperated IPhoneAppService, we considering Person as an aggregate and add phone related methods */
         //todo add later phonePermissions as childs for EditPerson (editPhone etc)
         [AbpAuthorize(PermissionNames.Pages_Tenant_PhoneBook_EditPerson)]

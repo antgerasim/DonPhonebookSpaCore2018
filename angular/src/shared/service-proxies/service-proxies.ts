@@ -364,6 +364,114 @@ export class PersonServiceProxy {
     }
 
     /**
+     * @return Success
+     */
+    getPersonForEdit(id: number): Observable<GetPersonForEditOutput> {
+        let url_ = this.baseUrl + "/api/services/app/Person/GetPersonForEdit?";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
+            url_ += "Id=" + encodeURIComponent("" + id) + "&"; 
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            method: "get",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+                "Accept": "application/json"
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processGetPersonForEdit(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processGetPersonForEdit(<any>response_);
+                } catch (e) {
+                    return <Observable<GetPersonForEditOutput>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<GetPersonForEditOutput>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processGetPersonForEdit(response: Response): Observable<GetPersonForEditOutput> {
+        const status = response.status; 
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = resultData200 ? GetPersonForEditOutput.fromJS(resultData200) : new GetPersonForEditOutput();
+            return Observable.of(result200);
+        } else if (status === 401) {
+            const _responseText = response.text();
+            return throwException("A server error occurred.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.text();
+            return throwException("A server error occurred.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<GetPersonForEditOutput>(<any>null);
+    }
+
+    /**
+     * @input (optional) 
+     * @return Success
+     */
+    editPerson(input: EditPersonInput): Observable<void> {
+        let url_ = this.baseUrl + "/api/services/app/Person/EditPerson";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(input);
+
+        let options_ : any = {
+            body: content_,
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json", 
+            })
+        };
+
+        return this.http.request(url_, options_).flatMap((response_ : any) => {
+            return this.processEditPerson(response_);
+        }).catch((response_: any) => {
+            if (response_ instanceof Response) {
+                try {
+                    return this.processEditPerson(<any>response_);
+                } catch (e) {
+                    return <Observable<void>><any>Observable.throw(e);
+                }
+            } else
+                return <Observable<void>><any>Observable.throw(response_);
+        });
+    }
+
+    protected processEditPerson(response: Response): Observable<void> {
+        const status = response.status; 
+
+        let _headers: any = response.headers ? response.headers.toJSON() : {};
+        if (status === 200) {
+            const _responseText = response.text();
+            return Observable.of<void>(<any>null);
+        } else if (status === 401) {
+            const _responseText = response.text();
+            return throwException("A server error occurred.", status, _responseText, _headers);
+        } else if (status === 403) {
+            const _responseText = response.text();
+            return throwException("A server error occurred.", status, _responseText, _headers);
+        } else if (status !== 200 && status !== 204) {
+            const _responseText = response.text();
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+        }
+        return Observable.of<void>(<any>null);
+    }
+
+    /**
      * @input (optional) 
      * @return Success
      */
@@ -2205,6 +2313,114 @@ export class CreatePersonInput implements ICreatePersonInput {
 }
 
 export interface ICreatePersonInput {
+    name: string;
+    surname: string;
+    emailAddress: string;
+}
+
+export class GetPersonForEditOutput implements IGetPersonForEditOutput {
+    id: number;
+    name: string;
+    surname: string;
+    emailAddress: string;
+
+    constructor(data?: IGetPersonForEditOutput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.id = data["id"];
+            this.name = data["name"];
+            this.surname = data["surname"];
+            this.emailAddress = data["emailAddress"];
+        }
+    }
+
+    static fromJS(data: any): GetPersonForEditOutput {
+        let result = new GetPersonForEditOutput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["surname"] = this.surname;
+        data["emailAddress"] = this.emailAddress;
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new GetPersonForEditOutput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IGetPersonForEditOutput {
+    id: number;
+    name: string;
+    surname: string;
+    emailAddress: string;
+}
+
+export class EditPersonInput implements IEditPersonInput {
+    id: number;
+    name: string;
+    surname: string;
+    emailAddress: string;
+
+    constructor(data?: IEditPersonInput) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.id = data["id"];
+            this.name = data["name"];
+            this.surname = data["surname"];
+            this.emailAddress = data["emailAddress"];
+        }
+    }
+
+    static fromJS(data: any): EditPersonInput {
+        let result = new EditPersonInput();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["surname"] = this.surname;
+        data["emailAddress"] = this.emailAddress;
+        return data; 
+    }
+
+    clone() {
+        const json = this.toJSON();
+        let result = new EditPersonInput();
+        result.init(json);
+        return result;
+    }
+}
+
+export interface IEditPersonInput {
+    id: number;
     name: string;
     surname: string;
     emailAddress: string;

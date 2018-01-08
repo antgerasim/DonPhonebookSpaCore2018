@@ -5,4 +5,5 @@ login: DonUser
 pass: 123456
 emial: donuser@donmail.com
 
-weiter mit Filtering people
+weiter mit Create edit-person-modal.component.html:
+https://aspnetzero.com/Documents/Developing-Step-By-Step-Angular#edit-mode-for-people
