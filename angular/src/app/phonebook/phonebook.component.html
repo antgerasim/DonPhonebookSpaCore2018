@@ -44,7 +44,7 @@
                                         <div class="col-sm-10" style="margin-bottom: -20px">
                                             <div class="form-group">
                                                 <div (click)="editPersonDetails(person)" role="button">
-                                                    <h4 class="h4 font-bold"  title="Show person details">
+                                                    <h4 class="h4 font-bold" title="Show person details">
                                                         {{person.name + ' ' + person.surname}}
                                                     </h4>
                                                     <span class="text">
@@ -127,9 +127,5 @@
     </div>
 </div>
 
-
-<create-person-modal #createPersonModal (modalSave)="getPeople()"></create-person-modal> <!--#createPersonModal used in ViewChild() in component.ts-->
-<!--<create-person-modal2 #createPersonModal2 (modalSave)="getPeople()"></create-person-modal2>-->
+<create-person-modal #createPersonModal (modalSave)="getPeople()"></create-person-modal>
 <edit-person-modal #editPersonModal (modalSave)="getPeople()"></edit-person-modal>
-
-<!--<create-role-modal #createRoleModal (modalSave)="refresh()"></create-role-modal>-->
